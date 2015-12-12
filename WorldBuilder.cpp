@@ -21,9 +21,6 @@ WorldBuilder::~WorldBuilder()
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-
-mapPoint mapGrid[gridSize][gridSize];
-
 WorldBuilder::WorldBuilder()
 {
 	// clear grid
@@ -65,7 +62,6 @@ void WorldBuilder::createMapGrid(){
 		str = "";
 		for (int x = 0; x < gridSize; x++) {
 			if (grid[x][y].occupied){
-				mapGrid[x][y].occupied = 'W';
 				str.append("W");
 				//str.append(std::string(1,grid[x][y].LRTB));
 			}

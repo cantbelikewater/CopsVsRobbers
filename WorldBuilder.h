@@ -24,8 +24,6 @@ typedef struct {
 	char occupied;
 } mapPoint;
 
-extern mapPoint mapGrid[gridSize][gridSize];
-
 class FTHEPOLICE_API WorldBuilder
 {
 
