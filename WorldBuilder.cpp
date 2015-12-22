@@ -62,7 +62,7 @@ void WorldBuilder::createMapGrid(){
 		str = "";
 		for (int x = 0; x < gridSize; x++) {
 			if (grid[x][y].occupied){
-				str.append("W");
+				str.append("O");
 				//str.append(std::string(1,grid[x][y].LRTB));
 			}
 			/*
@@ -70,7 +70,7 @@ void WorldBuilder::createMapGrid(){
 			str.append("I");
 			*/
 			else {
-				str.append("O");
+				str.append("_");
 			}
 			//str.append(std::string(1,grid[x][y].LRTB));
 
@@ -82,13 +82,14 @@ void WorldBuilder::createMapGrid(){
 		}
 	}
 	// print inside
+	/*
 	for (int y = (gridSize - 1); y >= 0; y--){
 		str = "";
 		for (int x = 0; x < gridSize; x++) {
 			if (grid[x][y].inside)
 				str.append("I");
 			else {
-				str.append("O");
+				str.append("_");
 			}
 			//str.append(std::string(1,grid[x][y].LRTB));
 
@@ -99,6 +100,7 @@ void WorldBuilder::createMapGrid(){
 			}
 		}
 	}
+	*/
 }
 
 // draws all the rectangles onto grid
@@ -230,7 +232,13 @@ void WorldBuilder::drawRectangle(rectangle rectangle_p) {
 				// not occupied (dont spawn a wall here)
 				LRTB_t = 'E';
 				occupied_t = false;
-				inside_t = true;
+				// exclude corners
+				if (   (x != 1) && (y != 1)
+					|| (x != 1) && (y!= correctedLength -1)
+					|| (x != correctedWidth - 1 ) && (y != correctedLength -1)
+					|| (x != correctedWidth - 1 ) && (y != 1))
+
+					inside_t = true;
 			}
 
 			grid[shiftedX + x][shiftedY + y].occupied = occupied_t;
